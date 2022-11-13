@@ -1,0 +1,87 @@
+<head>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body class="container py-3">
+
+    <!-- Configuration -->
+    <section class="card mb-3 pb-2">
+        
+        <div class="card-header">
+            Configuration
+        </div>
+
+        <div class="card-body">
+            <caption>Configure your url and token here</caption>
+            <!-- URL -->
+            <div class="input-group mb-1 ">
+                <span class="input-group-text">Canvas Base Url</span>
+                <input type="text" class="form-control cookied_value" id="base_url" placeholder="https://canvas.wisc.edu" aria-label="base_url" aria-describedby="base_url">
+            </div>
+
+            <!-- Token -->
+            <div class="input-group mb-1 ">
+                <span class="input-group-text">Canvas Token</span>
+                <input type="password" class="form-control cookied_value" id ="token" placeholder="Token" aria-label="token" aria-describedby="token">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Get Submissions -->
+    <section class="card mb-3  pb-2">
+        
+        <div class="card-header">
+            Submissions
+        </div>
+
+        <div class="card-body">
+            <!-- Descriptor -->
+            <caption>Use this section to download an assignment's submission record</caption>
+            <!-- Select Group or Section -->
+            <div class="input-group mb-1 ">
+                <label class="input-group-text" for="submission_select_type">Select student subpopulation</label>
+                <select class="form-select" id="submission_select_type">
+                  <option selected value="course">Search by Course</option>
+                  <option value="section">Search by Section</option>
+                </select>
+              </div>
+
+              <!-- Group or Section ID -->
+            <div class="input-group mb-1 ">
+                <span class="input-group-text">Course/Section ID</span>
+                <input type="number" class="form-control" id ="submission_group_section" placeholder="123456">
+            </div>
+            
+            <!-- Assignment ID -->
+            <div class="input-group mb-1 ">
+                <span class="input-group-text">Assignment ID</span>
+                <input type="number" class="form-control" id="submission_assignment" placeholder="123456">
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" id="submission_groups" type ="checkbox" checked>
+                <label class="form-check-label" for="submission_groups">Label rows with group name</label>
+            </div>           
+
+            <div class="float-end">
+                <div class="spinner-border text-primary" role="status" id="get_submission_loader" hidden>
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <button class=" btn btn-sm btn-primary" id="get_submission">Generate Report</button>
+            </div>
+            
+
+        </div>
+
+    </section>
+    
+    <script type='text/javascript' src='/static/canvasAPI_wrapper.js'></script>
+    <script type='text/javascript' src='/static/reform_data.js'></script>
+
+
+</body>
+
+
