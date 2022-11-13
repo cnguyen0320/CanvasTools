@@ -127,6 +127,9 @@ let get_submission_report = () =>{
         let parse_results = submissions_report_tsv(response, document.getElementById("submission_groups").checked)
         download(`${parse_results[0]}_SubmissionReport.tsv`, parse_results[1])
     })
+    .catch(()=>{
+        alert("An error occurred")
+    })
     .finally( () =>{
         spinner.hidden = true
         get_submission_btn.hidden = false
