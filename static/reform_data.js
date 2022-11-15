@@ -25,6 +25,9 @@ let submissions_report_tsv = (submissions, bygroup=false)=>{
     if(submissions.length == 0){
         throw "No submissions found"
     }
+    if(submissions.errors){
+        throw submissions.errors[0].message
+    }
 
     // start making rows
     let rows = []
@@ -127,8 +130,10 @@ let get_submission_report = () =>{
         let parse_results = submissions_report_tsv(response, document.getElementById("submission_groups").checked)
         download(`${parse_results[0]}_SubmissionReport.tsv`, parse_results[1])
     })
-    .catch(()=>{
-        alert("An error occurred")
+    .catch((err)=>{
+        console.log(err)
+        alert(`An error occurred\n${err}`)
+
     })
     .finally( () =>{
         spinner.hidden = true
@@ -172,3 +177,12 @@ let manage_cookies = () =>{
 }
 manage_cookies()
 
+let base_url = document.getElementById("base_url")
+
+// remove backslash of base url
+base_url.addEventListener("change", ()=>{
+    base_url.value = base_url.value.trim()
+    if(base_url.value.slice(-1) === "/"){
+        base_url.value = base_url.value.slice(0, -1)
+    }
+})
