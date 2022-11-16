@@ -1,6 +1,7 @@
 import flask
 from requests import get
 
+__DEBUG = True
 
 app = flask.Flask(__name__)
 
@@ -16,13 +17,14 @@ def proxy(path):
     else:
         result = get(f'{path}?{flask.request.query_string.decode()}', headers=reform_headers)
 
-    return result.json()
+    if __DEBUG:
+        print(result.content)
 
-@app.route("/")
+    return result.content
+
 def home():
     return flask.render_template("index.html")
 
 
-
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
