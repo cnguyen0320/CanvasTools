@@ -48,6 +48,7 @@ let submissions_report_tsv = (submissions, bygroup=false)=>{
         // insert description as header
         headers.push(rubric_item.description)
 
+
         // mapping maps an index to the rubric id
         rubric_mapping[rubric_item.id] = i
     }
@@ -85,7 +86,12 @@ let submissions_report_tsv = (submissions, bygroup=false)=>{
         let rubric_assessment = submission.rubric_assessment
 
         for(let r in rubric_mapping){
-            row.push(rubric_assessment[r].points)
+            try{
+                row.push(rubric_assessment[r].points)
+            }
+            catch (e) {
+                row.push("") // push empty score if points does not exist
+            }
         }
 
         // push the total score
